@@ -7,7 +7,7 @@ import './index.css';
 import { App } from './app.tsx';
 
 const { router } = createRouter({
-  pages: import.meta.glob('/src/pages/**/-page.tsx'),
+  pages: import.meta.glob('/src/pages/**/-page.tsx')
 });
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -17,5 +17,5 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <RouterProvider router={router} />
       </App>
     </HelmetProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 );

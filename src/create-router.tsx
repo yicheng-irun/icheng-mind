@@ -1,24 +1,24 @@
-import { FunctionComponent, lazy } from 'react';
+import { type FunctionComponent, lazy } from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserRouter } from 'react-router-dom';
 
 let cacheRoutes: RouteObject[] = [];
 
-export function getCacheRoutes() {
+export function getCacheRoutes () {
   return cacheRoutes;
 }
 
-export function createRouter({
-  pages,
+export function createRouter ({
+  pages
 }: {
-  pages: Record<string, () => Promise<Record<string, any>>>;
+  pages: Record<string, () => Promise<Record<string, any>>>
 }) {
   const routes: RouteObject[] = [];
   cacheRoutes = routes;
 
   Object.keys(pages).forEach(path => {
     const match = /^\/src\/pages(.*)\/-page\.tsx$/.exec(path);
-    if (match) {
+    if (match != null) {
       const name = match[1];
       if (name.toLocaleLowerCase() !== name) {
         console.error(new Error(`请使用小写路径为该路径进行命名:/pages${name}`));
@@ -40,7 +40,7 @@ export function createRouter({
       routes.push({
         path: `${routerPath}`,
         errorElement: <div>出错了</div>,
-        element: <AsyncComp />,
+        element: <AsyncComp />
       });
     }
   });
@@ -60,11 +60,11 @@ export function createRouter({
   // });
 
   const router = createBrowserRouter(routes, {
-    basename: import.meta.env.BASE_URL || '/',
+    basename: import.meta.env.BASE_URL || '/'
   });
 
   return {
     router,
-    routes,
+    routes
   };
 }
